@@ -2,20 +2,30 @@
 <plugin xmlns="http://www.phonegap.com/ns/plugins/1.0"
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	id="de.kodira.cordova.Html2Pdf"
-	version="3.0.4">
+	version="0.0.1">
+
+	<engines>
+		<engine name="cordova" version=">=3.0.0" platform="ios"  />
+	</engines>
 
 	<name>HTMLtoPDF</name>
 
-	<asset src="www/MyPlugin.js" target="MyPlugin.js" />
+	<js-module src="www/Html2Pdf.js" name="Html2Pdf">
+		<clobbers target="plugin.Html2Pdf" />
+	</js-module>
 
 
 	<!-- ios -->
 	<platform name="ios">
-		<plugins-plist key="MyPlugin" />
-
-		<header-file src="MyPlugin.h" />
-
-		<source-file src="MyPlugin.m" />
+		<config-file target="config.xml" parent="/*"> 
+			<feature name="Html2Pdf">
+				<param name="ios-package" value="KHTML2PDFPlugin"/>
+			</feature> 
+		</config-file> 
+		<header-file src="src/ios/KHTML2PDFPlugin.h" />
+		<source-file src="src/ios/KHTML2PDFPlugin.m" />
+        <header-file src="src/ios/NDHTMLtoPdf.h"/>
+        <source-file src="src/ios/NDHTMLtoPdf.m"/>
 	</platform>
 
 </plugin>

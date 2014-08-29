@@ -1,24 +1,14 @@
-//
-//  MyPlugin.h
-//
-// Created by Olivier Louvignes on 2012-09-01.
-//
-// Copyright 2011 Olivier Louvignes. All rights reserved.
-// MIT Licensed
-
 #import <Foundation/Foundation.h>
 #import <Cordova/CDVPlugin.h>
 
-@interface MyPlugin : CDVPlugin {
-}
+@class NDHTMLtoPDF;
 
-#pragma mark - Properties
+@interface KHTML2PDFPlugin : CDVPlugin
 
+@property NDHTMLtoPDF* pdfCreator;
 @property (nonatomic, copy) NSString* callbackId;
 
-#pragma mark - Instance methods
-
-- (void)myMethod:(CDVInvokedUrlCommand*)command;
+- (void)createPdf:(CDVInvokedUrlCommand*)command;
 
 @end
 
