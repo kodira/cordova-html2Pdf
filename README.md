@@ -1,4 +1,4 @@
-# Cordova HTML 2 PDF converter (iOS only) #
+# Cordova HTML 2 PDF converter (iOS only for now) #
 
 !! WORK IN PROGRESS !!
 
@@ -11,6 +11,35 @@ by [Kodira](http://kodira.de)
 
 ## SUPPORTED PLATFORMS ##
 
+- **iOS** only (for now)
+
+
+## INSTALLATION ##
+
+Through the [Command-line Interface][CLI]:
+
+```bash
+cordova plugin add https://github.com/kodira/cordova-html2Pdf.git && cordova prepare
+```
+
+## USING THE PLUGIN
+
+Once the device is ready, the Html2Pdf is accessible at ``window.plugin.Html2Pdf```.
+
+Example:
+
+```javascript
+        var options = {
+            url: url, // the url to convet
+            size: 'A4', // 'A4', 'Letter', or numeric values, e.g.: [595.2, 841.8] (in points with 72 points per inch). Default is 'A4'
+            path: 'dummy.pdf', // path to the pdf, default is 'dummy.pdf'
+            margins: [10, 10, 10, 10] // [top, left, bottom, right], default is [10,10,10,10]
+        };
+
+        window.plugin.Html2Pdf.createPdf(options, function (filePath) {
+            window.open('file://' + filePath, '_blank', 'location=yes');
+        });
+```
 
 ## LICENSE ##
 
@@ -30,12 +59,15 @@ by [Kodira](http://kodira.de)
 
     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
     IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+    FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
     AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
     LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
     THE SOFTWARE.
 
 ## CREDITS ##
+
+* iOS-htmltopdf
+
 
 
