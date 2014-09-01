@@ -16,7 +16,7 @@ by [Kodira](http://kodira.de)
 
 ## INSTALLATION ##
 
-Through the [Command-line Interface][CLI]:
+Through the Command-line Interface:
 
 ```bash
 cordova plugin add https://github.com/kodira/cordova-html2Pdf.git && cordova prepare
@@ -24,7 +24,7 @@ cordova plugin add https://github.com/kodira/cordova-html2Pdf.git && cordova pre
 
 ## USING THE PLUGIN
 
-Once the device is ready, the Html2Pdf is accessible at ``window.plugin.Html2Pdf```.
+Once the device is ready, the Html2Pdf is accessible at ``window.plugin.Html2Pdf``.
 
 Example:
 
@@ -37,6 +37,8 @@ Example:
         };
 
         window.plugin.Html2Pdf.createPdf(options, function (filePath) {
+            // 'filePath' contains the absolute path to the generated PDF file, e.g. /var/mobile/Applications/AF4A8258-6A86-49BF-8B67-C37E4D4EAB24/Documents/dummy.pdf
+            // If you use the inapp browser plugin (https://github.com/apache/cordova-plugin-inappbrowser), you can display the PDF like this
             window.open('file://' + filePath, '_blank', 'location=yes');
         });
 ```
