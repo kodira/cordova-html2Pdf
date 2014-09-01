@@ -9,6 +9,9 @@ by [Kodira](http://kodira.de)
 * This is a quick and dirty cordova plugin wrapping iOS-htmltopdf.
 
 
+## SUPPORTED PLATFORMS ##
+
+
 ## LICENSE ##
 
     The MIT License
