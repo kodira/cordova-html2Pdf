@@ -5,8 +5,7 @@
 
 @interface KHTML2PDFPlugin : CDVPlugin
 
-@property NDHTMLtoPDF* pdfCreator;
-@property (nonatomic, copy) NSString* callbackId;
+@property (nonatomic) NSMutableArray* requests;
 
 - (void)createPdf:(CDVInvokedUrlCommand*)command;
 
