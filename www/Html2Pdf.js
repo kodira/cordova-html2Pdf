@@ -1,4 +1,4 @@
-cordova.define("de.kodira.cordova.Html2Pdf.Html2Pdf", function (require, exports, module) {
+
     function Html2Pdf() {
     }
 
@@ -40,5 +40,3 @@ cordova.define("de.kodira.cordova.Html2Pdf.Html2Pdf", function (require, exports
 
     module.exports = new Html2Pdf();
 
-
-});
