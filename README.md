@@ -24,7 +24,7 @@ cordova plugin add https://github.com/kodira/cordova-html2Pdf.git && cordova pre
 
 ## USING THE PLUGIN
 
-Once the device is ready, the Html2Pdf is accessible at ``window.plugin.Html2Pdf``.
+Once the device is ready, the Html2Pdf object is accessible via ``window.plugin.Html2Pdf``.
 
 Example:
 
