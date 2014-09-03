@@ -37,51 +37,51 @@
 @synthesize URL=_URL,webview,delegate=_delegate,PDFpath=_PDFpath,pageSize=_pageSize,pageMargins=_pageMargins;
 
 // Create PDF by passing in the URL to a webpage
-+ (id)createPDFWithURL:(NSURL*)URL pathForPDF:(NSString*)PDFpath delegate:(id <NDHTMLtoPDFDelegate>)delegate pageSize:(CGSize)pageSize margins:(UIEdgeInsets)pageMargins
++ (id)createPDFWithURL:(NSURL*)URL pathForPDF:(NSString*)PDFpath delegate:(id <NDHTMLtoPDFDelegate>)delegate pageSize:(CGSize)pageSize margins:(UIEdgeInsets)pageMargins delay:(double) delayInSeconds
 {
-    NDHTMLtoPDF *creator = [[NDHTMLtoPDF alloc] initWithURL:URL delegate:delegate pathForPDF:PDFpath pageSize:pageSize margins:pageMargins];
+    NDHTMLtoPDF *creator = [[NDHTMLtoPDF alloc] initWithURL:URL delegate:delegate pathForPDF:PDFpath pageSize:pageSize margins:pageMargins delay:delayInSeconds];
     
     return creator;
 }
 
 // Create PDF by passing in the HTML as a String
 + (id)createPDFWithHTML:(NSString*)HTML pathForPDF:(NSString*)PDFpath delegate:(id <NDHTMLtoPDFDelegate>)delegate
-               pageSize:(CGSize)pageSize margins:(UIEdgeInsets)pageMargins
+               pageSize:(CGSize)pageSize margins:(UIEdgeInsets)pageMargins delay:(double) delayInSeconds
 {
-    NDHTMLtoPDF *creator = [[NDHTMLtoPDF alloc] initWithHTML:HTML baseURL:nil delegate:delegate pathForPDF:PDFpath pageSize:pageSize margins:pageMargins];
+    NDHTMLtoPDF *creator = [[NDHTMLtoPDF alloc] initWithHTML:HTML baseURL:nil delegate:delegate pathForPDF:PDFpath pageSize:pageSize margins:pageMargins delay:delayInSeconds];
     
     return creator;
 }
 
 // Create PDF by passing in the HTML as a String, with a base URL
 + (id)createPDFWithHTML:(NSString*)HTML baseURL:(NSURL*)baseURL pathForPDF:(NSString*)PDFpath delegate:(id <NDHTMLtoPDFDelegate>)delegate
-               pageSize:(CGSize)pageSize margins:(UIEdgeInsets)pageMargins
+               pageSize:(CGSize)pageSize margins:(UIEdgeInsets)pageMargins delay:(double) delayInSeconds
 {
-    NDHTMLtoPDF *creator = [[NDHTMLtoPDF alloc] initWithHTML:HTML baseURL:baseURL delegate:delegate pathForPDF:PDFpath pageSize:pageSize margins:pageMargins];
+    NDHTMLtoPDF *creator = [[NDHTMLtoPDF alloc] initWithHTML:HTML baseURL:baseURL delegate:delegate pathForPDF:PDFpath pageSize:pageSize margins:pageMargins delay:delayInSeconds];
     
     return creator;
 }
-+ (id)createPDFWithURL:(NSURL*)URL pathForPDF:(NSString*)PDFpath pageSize:(CGSize)pageSize margins:(UIEdgeInsets)pageMargins successBlock:(NDHTMLtoPDFCompletionBlock)successBlock errorBlock:(NDHTMLtoPDFCompletionBlock)errorBlock
++ (id)createPDFWithURL:(NSURL*)URL pathForPDF:(NSString*)PDFpath pageSize:(CGSize)pageSize margins:(UIEdgeInsets)pageMargins successBlock:(NDHTMLtoPDFCompletionBlock)successBlock errorBlock:(NDHTMLtoPDFCompletionBlock)errorBlock delay:(double) delayInSeconds
 {
-    NDHTMLtoPDF *creator = [[NDHTMLtoPDF alloc] initWithURL:URL delegate:nil pathForPDF:PDFpath pageSize:pageSize margins:pageMargins];
+    NDHTMLtoPDF *creator = [[NDHTMLtoPDF alloc] initWithURL:URL delegate:nil pathForPDF:PDFpath pageSize:pageSize margins:pageMargins delay:delayInSeconds];
     creator.successBlock = successBlock;
     creator.errorBlock = errorBlock;
     
     return creator;
 }
 
-+ (id)createPDFWithHTML:(NSString*)HTML pathForPDF:(NSString*)PDFpath pageSize:(CGSize)pageSize margins:(UIEdgeInsets)pageMargins successBlock:(NDHTMLtoPDFCompletionBlock)successBlock errorBlock:(NDHTMLtoPDFCompletionBlock)errorBlock
++ (id)createPDFWithHTML:(NSString*)HTML pathForPDF:(NSString*)PDFpath pageSize:(CGSize)pageSize margins:(UIEdgeInsets)pageMargins successBlock:(NDHTMLtoPDFCompletionBlock)successBlock errorBlock:(NDHTMLtoPDFCompletionBlock)errorBlock delay:(double) delayInSeconds
 {
-    NDHTMLtoPDF *creator = [[NDHTMLtoPDF alloc] initWithHTML:HTML baseURL:nil delegate:nil pathForPDF:PDFpath pageSize:pageSize margins:pageMargins];
+    NDHTMLtoPDF *creator = [[NDHTMLtoPDF alloc] initWithHTML:HTML baseURL:nil delegate:nil pathForPDF:PDFpath pageSize:pageSize margins:pageMargins delay:delayInSeconds];
     creator.successBlock = successBlock;
     creator.errorBlock = errorBlock;
     
     return creator;
 }
 
-+ (id)createPDFWithHTML:(NSString*)HTML baseURL:(NSURL*)baseURL pathForPDF:(NSString*)PDFpath pageSize:(CGSize)pageSize margins:(UIEdgeInsets)pageMargins successBlock:(NDHTMLtoPDFCompletionBlock)successBlock errorBlock:(NDHTMLtoPDFCompletionBlock)errorBlock
++ (id)createPDFWithHTML:(NSString*)HTML baseURL:(NSURL*)baseURL pathForPDF:(NSString*)PDFpath pageSize:(CGSize)pageSize margins:(UIEdgeInsets)pageMargins successBlock:(NDHTMLtoPDFCompletionBlock)successBlock errorBlock:(NDHTMLtoPDFCompletionBlock)errorBlock delay:(double) delayInSeconds
 {
-    NDHTMLtoPDF *creator = [[NDHTMLtoPDF alloc] initWithHTML:HTML baseURL:baseURL delegate:nil pathForPDF:PDFpath pageSize:pageSize margins:pageMargins];
+    NDHTMLtoPDF *creator = [[NDHTMLtoPDF alloc] initWithHTML:HTML baseURL:baseURL delegate:nil pathForPDF:PDFpath pageSize:pageSize margins:pageMargins delay:delayInSeconds];
     creator.successBlock = successBlock;
     creator.errorBlock = errorBlock;
     
@@ -97,7 +97,7 @@
     return self;
 }
 
-- (id)initWithURL:(NSURL*)URL delegate:(id <NDHTMLtoPDFDelegate>)delegate pathForPDF:(NSString*)PDFpath pageSize:(CGSize)pageSize margins:(UIEdgeInsets)pageMargins
+- (id)initWithURL:(NSURL*)URL delegate:(id <NDHTMLtoPDFDelegate>)delegate pathForPDF:(NSString*)PDFpath pageSize:(CGSize)pageSize margins:(UIEdgeInsets)pageMargins delay:(double) delayInSeconds
 {
     if (self = [super init])
     {
@@ -107,6 +107,8 @@
                 
         self.pageMargins = pageMargins;
         self.pageSize = pageSize;
+
+        self.delayInSeconds = delayInSeconds;
         
         [self forceLoadView];
     }
@@ -114,7 +116,7 @@
 }
 
 - (id)initWithHTML:(NSString*)HTML baseURL:(NSURL*)baseURL delegate:(id <NDHTMLtoPDFDelegate>)delegate
-        pathForPDF:(NSString*)PDFpath pageSize:(CGSize)pageSize margins:(UIEdgeInsets)pageMargins
+        pathForPDF:(NSString*)PDFpath pageSize:(CGSize)pageSize margins:(UIEdgeInsets)pageMargins delay:(double) delayInSeconds
 {
     if (self = [super init])
     {
@@ -125,6 +127,8 @@
         
         self.pageMargins = pageMargins;
         self.pageSize = pageSize;
+
+        self.delayInSeconds = delayInSeconds;
 
         [self forceLoadView];
     }
@@ -158,27 +162,35 @@
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
     if (webView.isLoading) return;
-    
+
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(self.delayInSeconds * NSEC_PER_SEC));
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        [self render:webView];
+    });
+}
+
+-(void) render:(UIWebView*)webView {
+
     UIPrintPageRenderer *render = [[UIPrintPageRenderer alloc] init];
-    
+
     [render addPrintFormatter:webView.viewPrintFormatter startingAtPageAtIndex:0];
-        
+
     CGRect printableRect = CGRectMake(self.pageMargins.left,
                                   self.pageMargins.top,
                                   self.pageSize.width - self.pageMargins.left - self.pageMargins.right,
                                   self.pageSize.height - self.pageMargins.top - self.pageMargins.bottom);
-    
+
     CGRect paperRect = CGRectMake(0, 0, self.pageSize.width, self.pageSize.height);
-    
+
     [render setValue:[NSValue valueWithCGRect:paperRect] forKey:@"paperRect"];
     [render setValue:[NSValue valueWithCGRect:printableRect] forKey:@"printableRect"];
 
     self.PDFdata = [render printToPDF];
-    
+
     if (self.PDFpath) {
         [self.PDFdata writeToFile: self.PDFpath  atomically: YES];
     }
-    
+
     [self terminateWebTask];
 
     if (self.delegate && [self.delegate respondsToSelector:@selector(HTMLtoPDFDidSucceed:)])
@@ -187,7 +199,6 @@
     if(self.successBlock) {
         self.successBlock(self);
     }
-    
 
 }
 

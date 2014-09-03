@@ -24,6 +24,7 @@
         ops.url = options.url || 'www.kodira.de';
         ops.path = options.path || 'dummy.pdf';
         ops.margins = options.margins || [10, 10, 10, 10];
+        ops.delay = options.delay || 0.0;
 
         var _callback = function (result) {
             if (typeof callback === 'function') callback(result);
