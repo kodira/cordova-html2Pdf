@@ -30,7 +30,7 @@ Example:
             url: 'www.kodira.de', // the url pointing to the HTML document to convert into PDF
             size: 'A4', // 'A4', 'Letter', or numeric values, e.g.: [595.2, 841.8] (in points with 72 points per inch). Default is 'A4'
             path: 'dummy.pdf', // path to the generated PDF file, default is 'dummy.pdf'
-            margins: [10, 10, 10, 10] // [top, left, bottom, right], default is [10,10,10,10],
+            margins: [10, 10, 10, 10],  // [top, left, bottom, right], default is [10,10,10,10],
             delay:1.0 // give the page some extra time (in seconds) after loading (e.g. to execute some javascript), default  is 0.0 seconds.
         };
 
